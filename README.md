@@ -18,8 +18,8 @@
 - rabbitmq:3.12-management
 
 ### 验证
-1. RabbitMQ 管理界面：http://服务器IP:15672，示例：http://localhost:15672/
-2. Nacos 控制台：http://服务器IP:8848/nacos,示例：http://localhost:8848/nacos
+1. RabbitMQ 管理界面：`http://服务器IP:15672`，示例：http://localhost:15672/
+2. Nacos 控制台：`http://服务器IP:8848/nacos`，示例：http://localhost:8848/nacos/
 3. MySQL 连接验证：mysql -h 服务器IP -P 3306 -uroot -proot
 4. Redis 连接验证：docker exec redis redis-cli -a yourpassword info server
 
