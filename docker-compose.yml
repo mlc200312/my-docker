@@ -16,6 +16,29 @@ services:
     networks:
       - app-network
 
+  redis:
+    image: redis:7.0.12
+    container_name: redis
+    restart: unless-stopped
+    environment:
+      REDIS_PASSWORD: root
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis/data:/data
+    command: 
+      - /bin/sh
+      - -c
+      - "exec redis-server --requirepass \"$$REDIS_PASSWORD\""
+    healthcheck:
+      test: [ "CMD", "redis-cli", "-a", "$${REDIS_PASSWORD}", "ping" ]
+      interval: 5s
+      timeout: 10s
+      retries: 3
+    networks:
+      - app-network
+
   mysql:
     image: mysql:8.0.32
     container_name: mysql
@@ -36,26 +59,6 @@ services:
       - ./mysql/init:/docker-entrypoint-initdb.d
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-uroot", "-proot" ]
-      interval: 5s
-      timeout: 10s
-      retries: 3
-    networks:
-      - app-network
-
-  redis:
-    image: redis:7.0.12
-    container_name: redis
-    restart: unless-stopped
-    environment:
-      REDIS_PASSWORD: "redis"
-    ports:
-      - "6379:6379"
-    volumes:
-      - ./redis/conf/redis.conf:/usr/local/etc/redis/redis.conf
-      - ./redis/data:/data
-    command: redis-server /usr/local/etc/redis/redis.conf --requirepass "$${REDIS_PASSWORD}"
-    healthcheck:
-      test: [ "CMD", "redis-cli", "-a", "$${REDIS_PASSWORD}", "ping" ]
       interval: 5s
       timeout: 10s
       retries: 3
