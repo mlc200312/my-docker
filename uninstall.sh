@@ -25,7 +25,7 @@ docker-compose down -v
 #   - 确保不再需要这些数据后再执行
 #######################################
 echo "正在清理数据文件..."
-rm -rf {data}
+rm -rf data/*
 
 echo -e "\n卸载完成！"
 echo "验证结果："

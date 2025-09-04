@@ -29,16 +29,16 @@ echo "正在拷贝配置文件..."
 
 # 检查并拷贝MySQL初始化脚本
 if [ -f "conf/init.sql" ]; then
-    echo "拷贝MySQL初始化脚本: conf/init.sql -> ./mysql/init/"
-    cp -v conf/init.sql ./mysql/init/
+    echo "拷贝MySQL初始化脚本: conf/init.sql -> ./data/mysql/init/"
+    cp -v conf/init.sql ./data/mysql/init/
 else
     echo "警告：未找到MySQL初始化脚本 conf/init.sql"
 fi
 
 # 检查并拷贝Redis配置文件
 if [ -f "conf/redis.conf" ]; then
-    echo "拷贝Redis配置文件: conf/redis.conf -> ./redis/conf/"
-    cp -v conf/redis.conf ./redis/conf/
+    echo "拷贝Redis配置文件: conf/redis.conf -> ./data/redis/conf/"
+    cp -v conf/redis.conf ./data/redis/conf/
 else
     echo "警告：未找到Redis配置文件 conf/redis.conf"
 fi
